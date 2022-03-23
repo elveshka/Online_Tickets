@@ -1,6 +1,5 @@
 package ru.study.config;
 
-import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.filter.CharacterEncodingFilter;
@@ -8,14 +7,13 @@ import org.springframework.web.servlet.DispatcherServlet;
 
 import javax.servlet.FilterRegistration;
 import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
 import javax.servlet.ServletRegistration;
 
 public class WebApplicationInitializer implements org.springframework.web.WebApplicationInitializer {
     @Override
-    public void onStartup(ServletContext servletContext) throws ServletException {
+    public void onStartup(ServletContext servletContext) {
         AnnotationConfigWebApplicationContext appContext = new AnnotationConfigWebApplicationContext();
-        appContext.register(ApplicationContext.class);
+        appContext.register(ApplicationContextConfig.class);
 
         ServletRegistration.Dynamic dispatcher =
                 servletContext.addServlet("OTDispatcher", new DispatcherServlet(appContext));
